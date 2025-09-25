@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Verse Community - Connect with Pet Owners</title>
+    <meta name="description" content="Join Pet Verse, the friendly community for pet owners to share photos, tips, and connect with fellow pet lovers. Discover trending topics and expert advice.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            900: '#831843'
+                        },
+                        purple: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            900: '#581c87'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 100%); }
+        .gradient-primary { background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+    </style>
+    <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .logo-text {
+      font-family: 'Poppins', sans-serif;
+    }
+    .promo-text {
+      font-family: 'Arial', sans-serif;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #000;
+    }
+    #rad{
+      border-radius: 30px;
+    }
+    #radi{
+      border-radius: 40px;
+      height: 70vh;
+      width: auto;
+    }
+    .health {
+      color: #9B59B6; /* Purple */
+    }
+    .happiness {
+      color: #E91E63; /* Pink */
+    }
+    footer {
+      background-color: #2a254b;
+      color: white;
+      padding: 40px;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer-col {
+      flex: 1;
+      margin: 16px;
+      min-width: 200px;
+    }
+    .pet{
+      font-size: 40px;
+      
+    }
+
+    .footer-col h4 {
+      font-size: 16px;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    
+        <!-- Floating Decorative Icons -->
+<div class="absolute inset-0 pointer-events-none z-0">
+  <!-- Heart Top Left -->
+  <div class="absolute top-20 left-10 text-emerald-500 text-4xl opacity-30">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 drop-shadow-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+    </svg>
+  </div>
+
+  <!-- Bone Top Right -->
+  <div class="absolute top-40 right-20 text-rose-400 text-3xl opacity-40">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 drop-shadow-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path d="M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5Z" />
+    </svg>
+  </div>
+
+  <!-- Heart Bottom Left -->
+  <div class="absolute bottom-20 left-20 text-purple-500 text-2xl opacity-35">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 drop-shadow-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+    </svg>
+  </div>
+
+  <!-- Heart Center Left -->
+  <div class="absolute top-60 left-1/3 text-pink-500 text-3xl opacity-30">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 drop-shadow-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+    </svg>
+  </div>
+
+  <!-- Paw Print Top Right -->
+  <div class="absolute top-32 right-1/4 text-indigo-400 text-2xl opacity-25">
+    🐾
+  </div>
+  
+  <!-- Paw Print Bottom Right -->
+  <div class="absolute bottom-40 right-10 text-emerald-400 text-3xl opacity-30">
+    🐾
+  </div>
+
+  <!-- Paw Print Mid Left -->
+  <div class="absolute top-80 left-1/4 text-purple-400 text-2xl opacity-25">
+    🐾
+  </div>
+
+  <!-- Paw Print Bottom Center -->
+  <div class="absolute bottom-60 left-1/2 text-pink-400 text-3xl opacity-30">
+    🐾
+  </div>
+</div>
+
+    <header class="bg-white shadow-md px-6 py-4">
+  <div class="flex justify-between items-center">
+    <!-- Logo + Text -->
+    <div class="flex items-center space-x-3">
+      <img src="logo.jpg" alt="Pet Verse Logo" class="w-8 h-8">
+      <h1 class="text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text logo-text">
+        Pet Verse
+      </h1>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="menu-btn" class="md:hidden text-purple-600 focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex gap-6 items-center font-medium">
+      <a href="index.html" class="hover:text-purple-600">Home</a>
+      <a href="dashboard.html" class="hover:text-purple-600">Dashboard</a>
+      <a href="grooming.html" class="hover:text-purple-600">Grooming</a>
+      <a href="vet.html" class="hover:text-purple-600">Vets</a>
+      <a href="Store.html" class="hover:text-purple-600">Store</a>
+      <a href="Community.html" class="hover:text-purple-600">Community</a>
+      <button class="ml-4 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:opacity-90 transition" onclick="location.href='addpet.html'">
+        Add Pet
+      </button>
+    </nav>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden hidden flex-col mt-4 space-y-2 font-medium">
+    <a href="index.html" class="block hover:text-purple-600">Home</a>
+    <a href="dashboard.html" class="block hover:text-purple-600">Dashboard</a>
+    <a href="grooming.html" class="block hover:text-purple-600">Grooming</a>
+    <a href="vet.html" class="block hover:text-purple-600">Vets</a>
+    <a href="Store.html" class="block hover:text-purple-600">Store</a>
+    <a href="Community.html" class="block hover:text-purple-600">Community</a>
+    <button class="w-full text-left px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:opacity-90 transition" onclick="location.href='addpet.html'">
+      Add Pet
+    </button>
+  </div>
+</header>
+
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <!-- Header -->
+        <header class="text-center mb-16">
+            <div class="relative mb-8">
+                <div class="w-32 h-32 mx-auto rounded-full gradient-primary flex items-center justify-center text-white text-4xl font-bold shadow-lg">
+                    🐾
+                </div>
+            </div>
+            <h1 class="text-5xl font-bold text-gray-800 mb-4">Pet Verse Community</h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Connect with fellow pet lovers, share amazing moments, and discover the best tips for your furry friends
+            </p>
+        </header>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white rounded-xl p-6 shadow-md card-hover border border-pink-100">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 rounded-lg gradient-primary text-white">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Total Members</p>
+                            <p class="text-2xl font-bold text-gray-800">12.5K</p>
+                        </div>
+                    </div>
+                    <div class="text-green-500 text-sm font-medium">+8.2%</div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-md card-hover border border-pink-100">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 rounded-lg gradient-primary text-white">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">New Members</p>
+                            <p class="text-2xl font-bold text-gray-800">284</p>
+                        </div>
+                    </div>
+                    <div class="text-green-500 text-sm font-medium">+15.3%</div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-md card-hover border border-pink-100">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 rounded-lg gradient-primary text-white">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Daily Posts</p>
+                            <p class="text-2xl font-bold text-gray-800">1,892</p>
+                        </div>
+                    </div>
+                    <div class="text-green-500 text-sm font-medium">+12.8%</div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-md card-hover border border-pink-100">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 rounded-lg gradient-primary text-white">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">This Week</p>
+                            <p class="text-2xl font-bold text-gray-800">9.8K</p>
+                        </div>
+                    </div>
+                    <div class="text-green-500 text-sm font-medium">+5.4%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column - Main Feed -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Post Creator -->
+                <div class="bg-white rounded-xl p-6 shadow-md border border-pink-100">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-full gradient-primary flex items-center justify-center text-white font-semibold">
+                            You
+                        </div>
+                        <div class="flex-1">
+                            <textarea 
+                                id="postContent"
+                                placeholder="Share something amazing about your pets..."
+                                class="w-full border-0 resize-none bg-transparent text-gray-800 placeholder-gray-400 focus:outline-none min-h-[60px]"
+                                onfocus="expandPostCreator()"
+                            ></textarea>
+                            
+                            <div id="postActions" class="hidden mt-4 pt-4 border-t border-gray-200">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <button class="p-2 text-gray-400 hover:text-pink-500 hover:bg-pink-50 rounded-lg transition-colors">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            </svg>
+                                        </button>
+                                        <button class="p-2 text-gray-400 hover:text-purple-500 hover:bg-purple-50 rounded-lg transition-colors">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.5a2.5 2.5 0 110 5H9m4.5-1.206a11.955 11.955 0 01-2.5-2.829 11.955 11.955 0 01-2.5 2.829M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                        </button>
+                                        <button class="p-2 text-gray-400 hover:text-pink-500 hover:bg-pink-50 rounded-lg transition-colors">
+                                            <span class="text-lg">#</span>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="flex items-center gap-2">
+                                        <span id="charCount" class="text-sm text-gray-400">0/280</span>
+                                        <button 
+                                            id="shareBtn"
+                                            onclick="sharePost()"
+                                            disabled
+                                            class="px-6 py-2 gradient-primary text-white rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg transition-all duration-300"
+                                        >
+                                            Share
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Posts Feed -->
+                <div id="postsContainer" class="space-y-6">
+                    <!-- Posts will be dynamically added here -->
+                </div>
+            </div>
+            
+            <!-- Right Column - Sidebar -->
+            <div class="space-y-6">
+                <!-- Trending Topics -->
+                <div class="bg-white rounded-xl p-6 shadow-md border border-pink-100">
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg class="w-5 h-5 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                        <h2 class="text-xl font-semibold text-gray-800">Trending Topics</h2>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 rounded-lg hover:bg-pink-50 transition-colors cursor-pointer group">
+                            <div class="flex items-center gap-3">
+                                <span class="text-lg font-bold text-pink-400 group-hover:text-pink-500 transition-colors">#1</span>
+                                <div>
+                                    <div class="flex items-center gap-1">
+                                        <span class="text-lg">#</span>
+                                        <span class="font-semibold text-gray-800 group-hover:text-pink-500 transition-colors">PuppyTraining</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500">1,234 posts</p>
+                                </div>
+                            </div>
+                            <div class="text-green-500 text-sm font-medium">↗</div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 rounded-lg hover:bg-pink-50 transition-colors cursor-pointer group">
+                            <div class="flex items-center gap-3">
+                                <span class="text-lg font-bold text-pink-400 group-hover:text-pink-500 transition-colors">#2</span>
+                                <div>
+                                    <div class="flex items-center gap-1">
+                                        <span class="text-lg">#</span>
+                                        <span class="font-semibold text-gray-800 group-hover:text-pink-500 transition-colors">CatCare</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500">892 posts</p>
+                                </div>
+                            </div>
+                            <div class="text-green-500 text-sm font-medium">↗</div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 rounded-lg hover:bg-pink-50 transition-colors cursor-pointer group">
+                            <div class="flex items-center gap-3">
+                                <span class="text-lg font-bold text-pink-400 group-hover:text-pink-500 transition-colors">#3</span>
+                                <div>
+                                    <div class="flex items-center gap-1">
+                                        <span class="text-lg">#</span>
+                                        <span class="font-semibold text-gray-800 group-hover:text-pink-500 transition-colors">PetHealth</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500">756 posts</p>
+                                </div>
+                            </div>
+                            <div class="text-gray-500 text-sm font-medium">→</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Contributors -->
+                <div class="bg-white rounded-xl p-6 shadow-md border border-pink-100">
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg class="w-5 h-5 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                        </svg>
+                        <h2 class="text-xl font-semibold text-gray-800">Top Contributors</h2>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-3 rounded-lg hover:bg-pink-50 transition-colors cursor-pointer group">
+                            <div class="flex items-center gap-3">
+                                <div class="relative">
+                                    <span class="absolute -top-2 -left-2 gradient-primary text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">1</span>
+                                    <div class="w-12 h-12 rounded-full gradient-primary flex items-center justify-center text-white font-semibold">
+                                        SJ
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h3 class="font-semibold text-gray-800 group-hover:text-pink-500 transition-colors">Sarah Johnson</h3>
+                                        <svg class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3l14 9-14 9V3z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <p class="text-sm text-gray-500">@sarahpets</p>
+                                        <span class="text-xs bg-pink-100 text-pink-600 px-2 py-1 rounded-full">156 posts</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-pink-500">2450</p>
+                                <p class="text-xs text-gray-500">points</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 rounded-lg hover:bg-pink-50 transition-colors cursor-pointer group">
+                            <div class="flex items-center gap-3">
+                                <div class="relative">
+                                    <span class="absolute -top-2 -left-2 gradient-primary text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">2</span>
+                                    <div class="w-12 h-12 rounded-full gradient-primary flex items-center justify-center text-white font-semibold">
+                                        MC
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h3 class="font-semibold text-gray-800 group-hover:text-pink-500 transition-colors">Mike Chen</h3>
+                                        <svg class="w-4 h-4 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <p class="text-sm text-gray-500">@doglover</p>
+                                        <span class="text-xs bg-pink-100 text-pink-600 px-2 py-1 rounded-full">134 posts</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-pink-500">1892</p>
+                                <p class="text-xs text-gray-500">points</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let posts = [
+            {
+                author: { name: "Sarah Johnson", handle: "sarahpets" },
+                content: "Just got back from the most amazing walk with Bella! She made three new doggy friends at the park and couldn't stop wagging her tail. These moments remind me why I love being a pet parent 🐕❤️",
+                timestamp: "2 hours ago",
+                likes: 24,
+                comments: 8,
+                shares: 3,
+                liked: false
+            },
+            {
+                author: { name: "Mike Chen", handle: "doglover" },
+                content: "Pro tip for new cat parents: Luna taught me that the best cat toys are often the simplest ones. A cardboard box and some crinkly paper = hours of entertainment! What's your cat's favorite 'non-toy' toy?",
+                timestamp: "4 hours ago",
+                likes: 156,
+                comments: 32,
+                shares: 18,
+                liked: false
+            },
+            {
+                author: { name: "Emma Wilson", handle: "catwhisperer" },
+                content: "Charlie's first vet visit went better than expected! The staff was incredibly patient and gentle. Shoutout to Dr. Martinez at Paws & Hearts Clinic for making it a positive experience 🏥✨",
+                timestamp: "6 hours ago",
+                likes: 89,
+                comments: 15,
+                shares: 7,
+                liked: false
+            }
+        ];
+
+        function expandPostCreator() {
+            document.getElementById('postActions').classList.remove('hidden');
+        }
+
+        function updateCharCount() {
+            const content = document.getElementById('postContent').value;
+            const charCount = document.getElementById('charCount');
+            const shareBtn = document.getElementById('shareBtn');
+            
+            charCount.textContent = `${content.length}/280`;
+            charCount.className = content.length > 280 ? 'text-sm text-red-500' : 'text-sm text-gray-400';
+            shareBtn.disabled = !content.trim() || content.length > 280;
+        }
+
+        function sharePost() {
+            const content = document.getElementById('postContent').value;
+            if (content.trim()) {
+                const newPost = {
+                    author: { name: "You", handle: "yourhandle" },
+                    content: content,
+                    timestamp: "Just now",
+                    likes: 0,
+                    comments: 0,
+                    shares: 0,
+                    liked: false
+                };
+                
+                posts.unshift(newPost);
+                renderPosts();
+                
+                document.getElementById('postContent').value = '';
+                document.getElementById('postActions').classList.add('hidden');
+                updateCharCount();
+                
+                // Simple notification
+                alert('Post shared successfully!');
+            }
+        }
+
+        function toggleLike(index) {
+            posts[index].liked = !posts[index].liked;
+            posts[index].likes += posts[index].liked ? 1 : -1;
+            renderPosts();
+        }
+
+        function renderPosts() {
+            const container = document.getElementById('postsContainer');
+            container.innerHTML = posts.map((post, index) => `
+                <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-pink-100 card-hover">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 rounded-full gradient-primary flex items-center justify-center text-white font-semibold">
+                            ${post.author.name.split(' ').map(n => n[0]).join('')}
+                        </div>
+                        
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">${post.author.name}</h3>
+                                    <p class="text-sm text-gray-500">@${post.author.handle} · ${post.timestamp}</p>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <p class="mt-3 text-gray-800 leading-relaxed">${post.content}</p>
+                            
+                            <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
+                                <button 
+                                    onclick="toggleLike(${index})"
+                                    class="flex items-center gap-2 text-sm transition-all duration-200 ${post.liked ? 'text-pink-500 hover:text-pink-600' : 'text-gray-400 hover:text-pink-500'}"
+                                >
+                                    <svg class="w-5 h-5 ${post.liked ? 'fill-current' : ''}" fill="${post.liked ? 'currentColor' : 'none'}" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                    </svg>
+                                    <span>${post.likes}</span>
+                                </button>
+                                
+                                <button class="flex items-center gap-2 text-sm text-gray-400 hover:text-purple-500 transition-colors">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                    </svg>
+                                    <span>${post.comments}</span>
+                                </button>
+                                
+                                <button class="flex items-center gap-2 text-sm text-gray-400 hover:text-purple-500 transition-colors">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
+                                    </svg>
+                                    <span>${post.shares}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Event listeners
+        document.getElementById('postContent').addEventListener('input', updateCharCount);
+
+        // Initialize
+        renderPosts();
+        updateCharCount();
+    </script>
+    <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        
+        <h4 ><div class="pet">Pet Verse</div></h4>
+        <p>Your trusted companion for pet care, health tracking, and connecting with the pet community.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li>Pet Dashboard</li>
+          <li>Health Tracking</li>
+          <li>Vet Appointment</li>
+          <li>Pet Store</li>
+          <li>Community</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li>Help Center</li>
+          <li>Contact Us</li>
+          <li>Emergency Care</li>
+          <li>FAQ</li>
+          <li>Pet Care Tips</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li>support@pawpal.com</li>
+          <li>1-800-PET-CARE</li>
+          <li>123 Pet Street, Animal City, AC 12345</li>
+        </ul>
+            <div class="flex space-x-4 mt-4">
+        <a href="https://www.facebook.com" target="_blank" class="text-gray-400 hover:text-white">
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 5.006 3.657 9.128 8.438 9.878v-6.987H7.898v-2.89h2.54V9.845c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562v1.875h2.773l-.443 2.89h-2.33v6.987C18.343 21.128 22 17.006 22 12z"/>
+      </svg>
+    </a>
+      <a href="https://www.twitter.com" target="_blank" class="text-gray-400 hover:text-white">
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M8.29 20c7.547 0 11.675-6.155 11.675-11.49 0-.175 0-.349-.012-.522A8.18 8.18 0 0022 5.92a8.19 8.19 0 01-2.357.636 4.077 4.077 0 001.804-2.23 8.19 8.19 0 01-2.605.981A4.1 4.1 0 0015.448 4c-2.266 0-4.104 1.82-4.104 4.063 0 .318.036.627.106.924C7.728 8.87 5.1 7.4 3.24 5.1a4.02 4.02 0 00-.555 2.043c0 1.41.725 2.655 1.826 3.384a4.1 4.1 0 01-1.86-.51v.05c0 1.97 1.41 3.615 3.285 3.99a4.1 4.1 0 01-1.853.07c.522 1.61 2.037 2.78 3.833 2.81A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/>
+      </svg>
+    </a>
+      <a href="https://www.instagram.com" target="_blank" class="text-gray-400 hover:text-white">
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.25-.75a.75.75 0 110 1.5.75.75 0 010-1.5z"/>
+      </svg>
+    </a>
+    </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
