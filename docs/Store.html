@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Verse Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e3f2fd; /* Light blue background */
+        }
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+        }
+        .product-card {
+            border-radius: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .gradient-button {
+            background-image: linear-gradient(to right, #9B59B6, #E91E63);
+            color: white;
+            transition: opacity 0.3s ease;
+        }
+        .gradient-button:hover {
+            opacity: 0.9;
+        }
+        .promo-text {
+            font-family: 'Arial', sans-serif;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #000;
+        }
+        footer {
+            background-color: #2a254b;
+            color: white;
+            padding: 40px;
+        }
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .footer-col {
+            flex: 1;
+            margin: 16px;
+            min-width: 200px;
+        }
+        .pet {
+            font-size: 40px;
+        }
+        .footer-col h4 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-col ul li {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-md px-6 py-4">
+  <div class="flex justify-between items-center">
+    <!-- Logo + Text -->
+    <div class="flex items-center space-x-3">
+      <img src="logo.jpg" alt="Pet Verse Logo" class="w-8 h-8">
+      <h1 class="text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text logo-text">
+        Pet Verse
+      </h1>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="menu-btn" class="md:hidden text-purple-600 focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex gap-6 items-center font-medium">
+      <a href="index.html" class="hover:text-purple-600">Home</a>
+      <a href="dashboard.html" class="hover:text-purple-600">Dashboard</a>
+      <a href="grooming.html" class="hover:text-purple-600">Grooming</a>
+      <a href="vet.html" class="hover:text-purple-600">Vets</a>
+      <a href="Store.html" class="hover:text-purple-600">Store</a>
+      <a href="Community.html" class="hover:text-purple-600">Community</a>
+      <button class="ml-4 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:opacity-90 transition" onclick="location.href='addpet.html'">
+        Add Pet
+      </button>
+    </nav>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden hidden flex-col mt-4 space-y-2 font-medium">
+    <a href="index.html" class="block hover:text-purple-600">Home</a>
+    <a href="dashboard.html" class="block hover:text-purple-600">Dashboard</a>
+    <a href="grooming.html" class="block hover:text-purple-600">Grooming</a>
+    <a href="vet.html" class="block hover:text-purple-600">Vets</a>
+    <a href="Store.html" class="block hover:text-purple-600">Store</a>
+    <a href="Community.html" class="block hover:text-purple-600">Community</a>
+    <button class="w-full text-left px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:opacity-90 transition" onclick="location.href='addpet.html'">
+      Add Pet
+    </button>
+  </div>
+</header>
+
+    <main class="flex-1 container mx-auto px-4 py-8">
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-semibold text-gray-800 mb-2">Pet Verse Store</h1>
+            <p class="text-gray-600 text-lg">Premium pet products for your best friend</p>
+        </div>
+
+        <!-- Category Buttons -->
+        <div class="flex flex-wrap justify-center gap-4 mb-10">
+            <button id="all-products-btn" onclick="showCategory('all-products')" class="px-6 py-2 rounded-full bg-purple-500 text-white font-medium shadow-md transition duration-300">All Products</button>
+            <button id="foods-btn" onclick="showCategory('foods')" class="px-6 py-2 rounded-full bg-white text-gray-800 font-medium shadow-md hover:bg-purple-100 transition duration-300">Food</button>
+            <button id="toys-btn" onclick="showCategory('toys')" class="px-6 py-2 rounded-full bg-white text-gray-800 font-medium shadow-md hover:bg-purple-100 transition duration-300">Toys</button>
+            <button id="beds-btn" onclick="showCategory('beds')" class="px-6 py-2 rounded-full bg-white text-gray-800 font-medium shadow-md hover:bg-purple-100 transition duration-300">Beds</button>
+            <button id="grooming-btn" onclick="showCategory('grooming')" class="px-6 py-2 rounded-full bg-white text-gray-800 font-medium shadow-md hover:bg-purple-100 transition duration-300">Grooming</button>
+        </div>
+
+        <!-- All Products Section (Initially Visible) -->
+        <div id="all-products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+            <!-- Card 1 -->
+            <div class="bg-white p-4 product-card">
+                <img class="rounded-2xl mb-4 w-full h-48 object-cover" src="care1.jpg">
+                <h3 class="text-lg font-semibold text-gray-800">Premium Dog Food</h3>
+                <p class="text-sm text-gray-500 mt-1">Organic, grain-free nutrition for all breeds</p>
+                <div class="flex items-center justify-between mt-4">
+                    <span class="text-xl font-bold text-gray-900">$24.99</span>
+                    <button class="gradient-button p-2 rounded-full shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.435a.998.998 0 00.625.625l5.435 1.358a.997.997 0 00.042.01l1.222.305h2.527a1 1 0 000-2h-2.527l-.305-1.222a.997.997 0 00-.01-.042l-1.358-5.435a.998.998 0 00-.625-.625l-5.435-1.358a.997.997 0 00-.042-.01H3zm13 10a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm-4 0a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white p-4 product-card">
+                <img class="rounded-2xl mb-4 w-full h-48 object-cover" src="care2.jpg">
+                <h3 class="text-lg font-semibold text-gray-800">Interactive Cat Toys</h3>
+                <p class="text-sm text-gray-500 mt-1">Keep your feline friend entertained for hours</p>
+                <div class="flex items-center justify-between mt-4">
+                    <span class="text-xl font-bold text-gray-900">$15.99</span>
+                    <button class="gradient-button p-2 rounded-full shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.435a.998.998 0 00.625.625l5.435 1.358a.997.997 0 00.042.01l1.222.305h2.527a1 1 0 000-2h-2.527l-.305-1.222a.997.997 0 00-.01-.042l-1.358-5.435a.998.998 0 00-.625-.625l-5.435-1.358a.997.997 0 00-.042-.01H3zm13 10a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm-4 0a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white p-4 product-card">
+                <img class="rounded-2xl mb-4 w-full h-48 object-cover" src="care3.jpg">
+                <h3 class="text-lg font-semibold text-gray-800">Luxury Pet Bed</h3>
+                <p class="text-sm text-gray-500 mt-1">Orthopedic support for better sleep</p>
+                <div class="flex items-center justify-between mt-4">    
+                    <span class="text-xl font-bold text-gray-900">$89.99</span>
+                    <button class="gradient-button p-2 rounded-full shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.435a.998.998 0 00.625.625l5.435 1.358a.997.997 0 00.042.01l1.222.305h2.527a1 1 0 000-2h-2.527l-.305-1.222a.997.997 0 00-.01-.042l-1.358-5.435a.998.998 0 00-.625-.625l-5.435-1.358a.997.997 0 00-.042-.01H3zm13 10a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm-4 0a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-white p-4 product-card">
+                <img class="rounded-2xl mb-4 w-full h-48 object-cover" src="care4.jpg">
+                <h3 class="text-lg font-semibold text-gray-800">Grooming Kit</h3>
+                <p class="text-sm text-gray-500 mt-1">Professional tools for at-home grooming</p>
+                <div class="flex items-center justify-between mt-4">
+                    <span class="text-xl font-bold text-gray-900">$34.99</span>
+                    <button class="gradient-button p-2 rounded-full shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.435a.998.998 0 00.625.625l5.435 1.358a.997.997 0 00.042.01l1.222.305h2.527a1 1 0 000-2h-2.527l-.305-1.222a.997.997 0 00-.01-.042l-1.358-5.435a.998.998 0 00-.625-.625l-5.435-1.358a.997.997 0 00-.042-.01H3zm13 10a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm-4 0a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="bg-white p-4 product-card">
+                <img class="rounded-2xl mb-4 w-full h-48 object-cover" src="care5.jpg">
+                <h3 class="text-lg font-semibold text-gray-800">Flea & Tick Prevention</h3>
+                <p class="text-sm text-gray-500 mt-1">Monthly treatments to keep your pet protected from parasites</p>
+                <div class="flex items-center justify-between mt-4">
+                    <span class="text-xl font-bold text-gray-900">$45.99</span>
+                    <button class="gradient-button p-2 rounded-full shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.435a.998.998 0 00.625.625l5.435 1.358a.997.997 0 00.042.01l1.222.305h2.527a1 1 0 000-2h-2.527l-.305-1.222a.997.997 0 00-.01-.042l-1.358-5.435a.998.998 0 00-.625-.625l-5.435-1.358a.997.997 0 00-.042-.01H3zm13 10a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm-4 0a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="bg-white p-4 product-card">
+                <img class="rounded-2xl mb-4 w-full h-48 object-cover" src="care7.jpg">
+                <h3 class="text-lg font-semibold text-gray-800">Vitamins & Supplements</h3>
+                <p class="text-sm text-gray-500 mt-1">Essential nutrients to support your pet's health and vitality</p>
+                <div class="flex items-center justify-between mt-4">
+                    <span class="text-xl font-bold text-gray-900">$29.99</span>
+                    <button class="gradient-button p-2 rounded-full shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.435a.998.998 0 00.625.625l5.435 1.358a.997.997 0 00.042.01l1.222.305h2.527a1 1 0 000-2h-2.527l-.305-1.222a.997.997 0 00-.01-.042l-1.358-5.435a.998.998 0 00-.625-.625l-5.435-1.358a.997.997 0 00-.042-.01H3zm13 10a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm-4 0a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="bg-white p-4 product-card">
+                <img class="rounded-2xl mb-4 w-full h-48 object-cover" src="care6.jpg">
+                <h3 class="text-lg font-semibold text-gray-800">Pet First Aid Kit</h3>
+                <p class="text-sm text-gray-500 mt-1">Complete emergency kit for minor injuries and accidents</p>
+                <div class="flex items-center justify-between mt-4">
+                    <span class="text-xl font-bold text-gray-900">$39.99</span>
+                    <button class="gradient-button p-2 rounded-full shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.435a.998.998 0 00.625.625l5.435 1.358a.997.997 0 00.042.01l1.222.305h2.527a1 1 0 000-2h-2.527l-.305-1.222a.997.997 0 00-.01-.042l-1.358-5.435a.998.998 0 00-.625-.625l-5.435-1.358a.997.997 0 00-.042-.01H3zm13 10a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm-4 0a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Food Category -->
+        <div id="foods" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div class="bg-white p-4 product-card">
+                <img class="rounded-2xl mb-4 w-full h-48 object-cover" src="care5.jpg">
+                <h3 class="text-lg font-semibold text-gray-800">Natural Grain-Free Kibble</h3>
+                <p class="text-sm text-gray-500 mt-1">A balanced blend of protein and vegetables.</p>
+                <div class="flex items-center justify-between mt-4">
+                    <span class="text-xl font-bold text-gray-900">$29.99</span>
+                    <button class="gradient-button p-2 rounded-full shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.435a.998.998 0 00.625.625l5.435 1.358a.997.997 0 00.042.01l1.222.305h2.527a1 1 0 000-2h-2.527l-.305-1.222a.997.997 0 00-.01-.042l-1.358-5.435a.998.998 0 00-.625-.625l-5.435-1.358a.997.997 0 00-.042-.01H3zm13 10a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm-4 0a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toys Category -->
+        <div id="toys" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div class="bg-white p-4 product-card">
+                <img class="rounded-2xl mb-4 w-full h-48 object-cover" src="care10.jpg">
+                <h3 class="text-lg font-semibold text-gray-800">Durable Rope Chew Toy</h3>
+                <p class="text-sm text-gray-500 mt-1">Promotes dental health and provides endless fun.</p>
+                <div class="flex items-center justify-between mt-4">
+                    <span class="text-xl font-bold text-gray-900">$12.50</span>
+                    <button class="gradient-button p-2 rounded-full shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.435a.998.998 0 00.625.625l5.435 1.358a.997.997 0 00.042.01l1.222.305h2.527a1 1 0 000-2h-2.527l-.305-1.222a.997.997 0 00-.01-.042l-1.358-5.435a.998.998 0 00-.625-.625l-5.435-1.358a.997.997 0 00-.042-.01H3zm13 10a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm-4 0a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Beds Category -->
+        <div id="beds" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div class="bg-white p-4 product-card">
+                <img class="rounded-2xl mb-4 w-full h-48 object-cover" src="care9.jpg">
+                <h3 class="text-lg font-semibold text-gray-800">Memory Foam Dog Bed</h3>
+                <p class="text-sm text-gray-500 mt-1">Provides superior comfort and joint support.</p>
+                <div class="flex items-center justify-between mt-4">
+                    <span class="text-xl font-bold text-gray-900">$95.00</span>
+                    <button class="gradient-button p-2 rounded-full shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.435a.998.998 0 00.625.625l5.435 1.358a.997.997 0 00.042.01l1.222.305h2.527a1 1 0 000-2h-2.527l-.305-1.222a.997.997 0 00-.01-.042l-1.358-5.435a.998.998 0 00-.625-.625l-5.435-1.358a.997.997 0 00-.042-.01H3zm13 10a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm-4 0a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grooming Category -->
+        <div id="grooming" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div class="bg-white p-4 product-card">
+                <img class="rounded-2xl mb-4 w-full h-48 object-cover" src="care8.jpg">
+                <h3 class="text-lg font-semibold text-gray-800">Complete Grooming Set</h3>
+                <p class="text-sm text-gray-500 mt-1">Everything you need for a salon-quality groom at home.</p>
+                <div class="flex items-center justify-between mt-4">
+                    <span class="text-xl font-bold text-gray-900">$49.99</span>
+                    <button class="gradient-button p-2 rounded-full shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.435a.998.998 0 00.625.625l5.435 1.358a.997.997 0 00.042.01l1.222.305h2.527a1 1 0 000-2h-2.527l-.305-1.222a.997.997 0 00-.01-.042l-1.358-5.435a.998.998 0 00-.625-.625l-5.435-1.358a.997.997 0 00-.042-.01H3zm13 10a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm-4 0a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-8">
+            <button class="px-8 py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold shadow-lg hover:opacity-90 transition">View All Products</button>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4 ><div class="pet">Pet Verse</div></h4>
+                <p>Your trusted companion for pet care, health tracking, and connecting with the pet community.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <ul>
+                    <li>Pet Dashboard</li>
+                    <li>Health Tracking</li>
+                    <li>Vet Appointment</li>
+                    <li>Pet Store</li>
+                    <li>Community</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li>Help Center</li>
+                    <li>Contact Us</li>
+                    <li>Emergency Care</li>
+                    <li>FAQ</li>
+                    <li>Pet Care Tips</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li>support@petverse.com</li>
+                    <li>1-800-PET-CARE</li>
+                    <li>123 Pet Street, Animal City, AC 12345</li>
+                </ul>
+                <div class="flex space-x-4 mt-4">
+                    <a href="https://www.facebook.com" target="_blank" class="text-gray-400 hover:text-white">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 5.006 3.657 9.128 8.438 9.878v-6.987H7.898v-2.89h2.54V9.845c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562v1.875h2.773l-.443 2.89h-2.33v6.987C18.343 21.128 22 17.006 22 12z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.twitter.com" target="_blank" class="text-gray-400 hover:text-white">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8.29 20c7.547 0 11.675-6.155 11.675-11.49 0-.175 0-.349-.012-.522A8.18 8.18 0 0022 5.92a8.19 8.19 0 01-2.357.636 4.077 4.077 0 001.804-2.23 8.19 8.19 0 01-2.605.981A4.1 4.1 0 0015.448 4c-2.266 0-4.104 1.82-4.104 4.063 0 .318.036.627.106.924C7.728 8.87 5.1 7.4 3.24 5.1a4.02 4.02 0 00-.555 2.043c0 1.41.725 2.655 1.826 3.384a4.1 4.1 0 01-1.86-.51v.05c0 1.97 1.41 3.615 3.285 3.99a4.1 4.1 0 01-1.853.07c.522 1.61 2.037 2.78 3.833 2.81A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com" target="_blank" class="text-gray-400 hover:text-white">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.25-.75a.75.75 0 110 1.5.75.75 0 010-1.5z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Function to show and hide product categories
+        function showCategory(category) {
+            // Get all content sections and buttons
+            const sections = {
+                'all-products': document.getElementById('all-products'),
+                'foods': document.getElementById('foods'),
+                'toys': document.getElementById('toys'),
+                'beds': document.getElementById('beds'),
+                'grooming': document.getElementById('grooming')
+            };
+            const buttons = {
+                'all-products': document.getElementById('all-products-btn'),
+                'foods': document.getElementById('foods-btn'),
+                'toys': document.getElementById('toys-btn'),
+                'beds': document.getElementById('beds-btn'),
+                'grooming': document.getElementById('grooming-btn')
+            };
+
+            // Hide all sections and reset button styles
+            for (const key in sections) {
+                sections[key].classList.add('hidden');
+                buttons[key].classList.remove('bg-purple-500', 'text-white');
+                buttons[key].classList.add('bg-white', 'text-gray-800');
+            }
+
+            // Show the selected section and update button style
+            sections[category].classList.remove('hidden');
+            buttons[category].classList.remove('bg-white', 'text-gray-800');
+            buttons[category].classList.add('bg-purple-500', 'text-white');
+        }
+    </script>
+</body>
+</html>
