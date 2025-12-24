@@ -57,12 +57,14 @@
     </div>
 
 <script>
-    const signupBtn = document.getElementById('signupBtn');
-    const message = document.getElementById('message');
+   
+  const signupForm = document.getElementById('signupForm');
 
-    signupBtn.addEventListener('click', () => {
-      message.textContent = "Signup received. We’ll be in touch soon!";
-    });
+  signupForm.addEventListener('submit', (e) => {
+    e.preventDefault(); // Prevent actual form submission
+    alert("Signup received. We’ll be in touch soon!");
+  });
+
   </script>
 
 
